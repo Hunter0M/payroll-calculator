@@ -81,19 +81,27 @@ form.addEventListener("submit", function (e) {
     let taxable_income = gross_Salary - (NSSF + NHDF)
     document.getElementById("taxable_income").innerText = taxable_income
 
+    // Relief
+    let relief = 2400
+    document.getElementById("relief").innerHTML=relief
+
     // PAYEE
 
     if (taxable_income >= 0 && taxable_income <= 24000) {
-        PAYEE = 24000 * 0.1
+        PAYEE = relief
     }
     else if (taxable_income > 24000 && taxable_income <= 32333) {
-        PAYEE = ((taxable_income * 0.25) + (24000 * 0.1)) - 2400
+        PAYEE = ((taxable_income - 24000) / 0.25) + ((24000 * 0.1) - relief)
     }
     else {
-        PAYEE = ((taxable_income * 0.3) + (taxable_income * 0.25) + (24000 * 0.1)) - 2400
+        PAYEE = ((taxable_income - 32333) * 0.30) + ((24000 * 0.1) + (8333 * 0.25)) - relief 
+    }
+
         document.getElementById("payee").innerHTML = PAYEE
         form.reset();
-    }
-    // NET PAY 
     
+    // NET PAY 
+    let net_pay=taxable_income-((NHIF+PAYEE)-relief)
+    document.getElementById("net_pay").innerHTML=net_pay
+
 })
