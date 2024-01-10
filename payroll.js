@@ -94,21 +94,21 @@ form.addEventListener("submit", function (e) {
         PAYEE = ((taxable_income - 24000) * 0.25) + ((24000 * 0.1) - relief)
     }
     else if (taxable_income > 32333 && taxable_income <= 500000) {
-        PAYEE = ((taxable_income - 32333) * 0.3) + ((24000 * 0.1) + 8333 * 0.25 - relief)
+        PAYEE = ((taxable_income - 32333) * 0.3) + ((24000 * 0.1) + (8333 * 0.25) - relief)
     }
     else if (taxable_income > 500000 && taxable_income <= 800000) {
         PAYEE = ((taxable_income - 500000) * 0.325) + ((24000 * 0.1) + (8333 * 0.25) + (467667 * 0.3) - relief)
 
     }
     else {
-        PAYEE = ((taxable_income - 800000) * 0.35) + ((24000 * 0.1) + (8333 * 0.25) + (467667 * 0.3)+ (300000*0.325)) - relief
+        PAYEE = ((taxable_income - 800000) * 0.35) + ((24000 * 0.1) + (8333 * 0.25) + (467667 * 0.3) + (300000 * 0.325)) - relief
     }
 
     document.getElementById("payee").innerHTML = PAYEE
     form.reset();
 
     // NET PAY 
-    let net_pay = taxable_income - ((NHIF + PAYEE) - relief)
+    let net_pay = gross_Salary - (NHIF + PAYEE + NSSF + NHDF) 
     document.getElementById("net_pay").innerHTML = net_pay
 
 })
